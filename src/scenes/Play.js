@@ -8,6 +8,8 @@ class Play extends Phaser.Scene {
     create() {
         const map = this.createMap()
         const layers = this.createLayers(map)
+
+        this.createPlayer();
     }
 
     createMap() {
@@ -23,6 +25,12 @@ class Play extends Phaser.Scene {
         const platforms = map.createLayer('environments', tileSet)
 
         return { envLayer, platforms }
+    }
+
+    createPlayer() {
+        const player = this.physics.add.sprite(150, 355, 'player')
+        player.body.setGravityY(500);
+        player.setCollideWorldBounds(true)
     }
 }
 
