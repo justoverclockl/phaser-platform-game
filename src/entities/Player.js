@@ -54,9 +54,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.jumpCount = 0;
         }
 
+        onFloor ?
         this.body.velocity.x !== 0
             ? this.play('run', true)
             : this.play('idle', true)
+            : this.play('jump', true)
         // true means don't play again if it's already playing
 
     }
