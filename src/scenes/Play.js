@@ -6,13 +6,23 @@ class Play extends Phaser.Scene {
     }
 
     create() {
+        const map = this.createMap()
+        const layers = this.createLayers(map)
+    }
+
+    createMap() {
         const map = this.make.tilemap({key: 'map'})
-        const tileSet1 = map.addTilesetImage('main_lev_build_1', 'tiles-1')
-        const tileSet2 = map.addTilesetImage('main_lev_build_2', 'tiles-2')
+        map.addTilesetImage('main_lev_build_1', 'tiles-1')
 
+        return map;
+    }
 
-        map.createLayer('platforms', tileSet1)
-        map.createLayer('environments', tileSet1)
+    createLayers(map) {
+        const tileSet = map.getTileset('main_lev_build_1')
+        const envLayer = map.createLayer('platforms', tileSet)
+        const platforms = map.createLayer('environments', tileSet)
+
+        return { envLayer, platforms }
     }
 }
 
