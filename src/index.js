@@ -4,9 +4,11 @@ import Preload from "./scenes/Preload";
 
 const WIDTH = 1280;
 const HEIGHT = 600;
+const MAP_WIDTH = 1600;
 
 const SHARED_CONFIG = {
-  width: WIDTH,
+  mapOffset: MAP_WIDTH > WIDTH ? MAP_WIDTH - WIDTH : 0,
+  width: document.body.offsetWidth,
   height: HEIGHT,
 }
 
