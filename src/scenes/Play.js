@@ -6,11 +6,14 @@ class Play extends Phaser.Scene {
     }
 
     create() {
-        const map = this.createMap()
-        const layers = this.createLayers(map)
+        const map = this.createMap();
+        const layers = this.createLayers(map);
 
-        const player = this.createPlayer();
-        this.physics.add.collider(player, layers.platformColliders)
+        this.player = this.createPlayer();
+
+        this.playerSpeed = 200;
+        this.physics.add.collider(this.player, layers.platformColliders);
+        this.cursors = this.input.keyboard.createCursorKeys();
     }
 
     createMap() {
@@ -27,7 +30,6 @@ class Play extends Phaser.Scene {
         const envLayer = map.createLayer('environments', tileSet)
         const platforms = map.createLayer('platforms', tileSet)
 
-
         // -1 is intended for collide only with layers that have more than 0 zindex
         platformColliders.setCollisionByExclusion(-1, true)
 
@@ -40,6 +42,18 @@ class Play extends Phaser.Scene {
         player.setCollideWorldBounds(true)
 
         return player;
+    }
+
+    update() {
+        const { left, right } = this.cursors;
+
+        if (left.isDown) {
+            this.player.setVelocityX(-this.playerSpeed)
+        } else if (right.isDown) {
+            this.player.setVelocityX(this.playerSpeed)
+        } else  {
+            this.player.setVelocityX(0)
+        }
     }
 }
 
