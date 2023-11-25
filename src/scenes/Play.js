@@ -34,6 +34,7 @@ class Play extends Phaser.Scene {
         const platformColliders = map.createLayer('platform_colliders', tileSet).setAlpha(0)
         const envLayer = map.createLayer('environments', tileSet)
         const platforms = map.createLayer('platforms', tileSet)
+        const playerZones = map.getObjectLayer('player_zones').objects
 
         // -1 is intended for collide only with layers that have more than 0 zindex
         platformColliders.setCollisionByExclusion(-1, true)
