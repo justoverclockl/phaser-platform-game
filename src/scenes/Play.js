@@ -19,6 +19,7 @@ class Play extends Phaser.Scene {
             platformColliders: layers.platformColliders
         }});
 
+        this.createEndOfLevel(playerZones.end)
         this.setupFollowupCameraOn(player)
     }
 
@@ -65,6 +66,13 @@ class Play extends Phaser.Scene {
             start: playerZones.find(zone => zone.name === 'startZone'),
             end: playerZones.find(zone => zone.name === 'endZone')
         }
+    }
+
+    createEndOfLevel(endZone) {
+        this.physics.add.sprite(endZone.x, endZone.y, 'end')
+            .setSize(5, this.config.height * 2)
+            .setAlpha(0)
+            .setOrigin(0.5, 1)
     }
 }
 
